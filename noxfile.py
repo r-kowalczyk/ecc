@@ -26,11 +26,16 @@ PYTHON_VERSIONS = ["3.12"]
 PYPY3_VERSION = "pypy3"
 LATEST_PYTHON = PYTHON_VERSIONS[-1]
 
+# A common exclusion pattern for ipynb files.
+IPYNB_EXCLUDE = "--exclude"
+IPYNB_PATTERN = ".*\\.ipynb$"
+
 
 @nox.session(python=LATEST_PYTHON, tags=["lint"])
 def ruff(session: nox.Session) -> None:
     """Lint with ruff."""
-    args = session.posargs or CODE_LOCATIONS
+    # If no arguments are provided, use CODE_LOCATIONS and exclude ipynb files.
+    args = session.posargs or [CODE_LOCATIONS, IPYNB_EXCLUDE, IPYNB_PATTERN]
     _install(session, "ruff")
     _run(session, "ruff", "check", *args)
 
@@ -38,7 +43,7 @@ def ruff(session: nox.Session) -> None:
 @nox.session(python=LATEST_PYTHON, tags=["format"])
 def black(session: nox.Session) -> None:
     """Reformat with black."""
-    args = session.posargs or CODE_LOCATIONS
+    args = session.posargs or [CODE_LOCATIONS, IPYNB_EXCLUDE, IPYNB_PATTERN]
     _install(session, "black")
     _run_code_modifier(session, "black", *args)
 
@@ -46,7 +51,7 @@ def black(session: nox.Session) -> None:
 @nox.session(python=LATEST_PYTHON, tags=["format"])
 def isort(session: nox.Session) -> None:
     """Reformat the import order with isort."""
-    args = session.posargs or CODE_LOCATIONS
+    args = session.posargs or [CODE_LOCATIONS, IPYNB_EXCLUDE, IPYNB_PATTERN]
     _install(session, "isort")
     _run_code_modifier(session, "isort", *args)
 
@@ -54,7 +59,7 @@ def isort(session: nox.Session) -> None:
 @nox.session(python=["3.8.18"], tags=["security"])
 def bandit(session: nox.Session) -> None:
     """Scan for common security issues with bandit."""
-    args = session.posargs or CODE_LOCATIONS
+    args = session.posargs or CODE_LOCATIONS  # Bandit may not support --exclude in the same way.
     _install(session, "bandit")
     _run(session, "bandit", *args)
 
@@ -84,7 +89,8 @@ def safety(session: nox.Session) -> None:
 @nox.session(python=PYTHON_VERSIONS, tags=["typecheck"])
 def mypy(session: nox.Session) -> None:
     """Verify types using mypy (so it is static)."""
-    args = session.posargs or CODE_LOCATIONS
+    # Mypy supports the --exclude option.
+    args = session.posargs or [CODE_LOCATIONS, "--exclude", IPYNB_PATTERN]
     _install(session, "mypy")
     _install(session, "types-requests")
     session.run("mypy", "--ignore-missing-imports", "--explicit-package-bases", *args)
