@@ -1,0 +1,34 @@
+name: template
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pip
+  - openpyxl
+  - hdbscan
+  - pip:
+      - bertopic==0.16.4
+      - openai
+      - numpy
+      - scipy
+      - scikit-learn
+      - pandas
+      - typing-extensions
+      - python-dotenv==1.0.1
+      - pyprojroot
+      - nltk
+      - matplotlib
+      - transformers
+      - scipy
+      - pre-commit
+      - onnxruntime
+      - onnxruntime-genai
+      - geopandas
+      - shapely
+      - geoip2
+      - seaborn
+      - umap-learn
+      - python-pptx
+      - PyPDF2
+      - tiktoken
