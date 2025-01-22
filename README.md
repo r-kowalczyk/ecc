@@ -45,14 +45,15 @@ This project implements a link classification pipeline that leverages hybrid nod
 # Results
 
 ```
-LogisticRegression test AUC (scaled, max_iter=1000): 0.9429
+LogisticRegression test AUC (scaled, max_iter=1000): 0.9406
 
-=== Best MLP Model Results (test set) ===
-  Config: hidden_dim=256, lr=0.0005, epochs=10
-  AUC:   0.9705
-  AUPR:  0.9600
-  F1:    0.8944
+=== Best MLP Model (Test Set) ===
+Config: hidden_dim=256, lr=0.0005, epochs=10
+AUC:   0.9691
+AUPR:  0.9569
+F1:    0.8922
 ```
+
 ---
 
 # Interpretation
