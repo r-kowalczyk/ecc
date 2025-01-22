@@ -1,4 +1,4 @@
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/r-kowalczyk/ecc/blob/main/src/challenge-nb.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/r-kowalczyk/ecc/blob/improvements/src/challenge-nb.ipynb)
 
 
 # ```Every Cure Data Science Challenge```
