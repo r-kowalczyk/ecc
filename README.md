@@ -44,7 +44,7 @@ This project implements a link classification pipeline that leverages hybrid nod
 
 # Results
 
-## Node2Vec + BioBERT
+## Node2Vec + BioBERT (original choice)
 
 ```
 LogisticRegression test AUC (scaled, max_iter=1000): 0.9406
@@ -68,10 +68,11 @@ AUPR:  0.9564
 F1:    0.8891
 ```
 
-## Node2Vec + BioM-BERT-PMC-Large
+## Node2Vec + BioM-BERT-PMC-Large (best performing)
+
+BioM-BERT-PMC-Large scores top of the BLURB leaderboard for relation extraction, which is a particularly relevant metric for drug-disease link prediction.
 
 ```
-
 LogisticRegression test AUC (scaled, max_iter=1000): 0.9417
 
 === Best MLP Model (Test Set) ===
@@ -81,12 +82,24 @@ AUPR:  0.9656
 F1:    0.9034
 ```
 
+## Node2Vec + Bioformer-16L
+
+```
+LogisticRegression test AUC (scaled, max_iter=1000): 0.9248
+
+=== Best MLP Model (Test Set) ===
+Config: hidden_dim=256, lr=0.001, epochs=10
+AUC:   0.9641
+AUPR:  0.9514
+F1:    0.8784
+```
+
 
 ---
 
-# Interpretation (BioBERT)
+# Interpretation (Node2Vec + BioBERT)
 
 - Both classifiers show strong performance. Strong performance using logistic regression alone suggests high quality feature representation using the hybrid embeddings (i.e. even a relatively simple model can make accurate predictions given how well the hybrid embeddings capture information about nodes and relationships).
 
-- However, the ~ 3% improvement in AUC from 0.9429 (logistic regression) to 0.9705 (best MLP) suggests that using a nonlinear classifier can capture complex patterns in the data more effectively. 
+- However, the ~ 3% improvement in AUC from 0.9406 (logistic regression) to 0.9691 (best MLP) suggests that using a nonlinear classifier can capture complex patterns in the data more effectively. 
 
