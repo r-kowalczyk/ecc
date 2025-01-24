@@ -44,6 +44,8 @@ This project implements a link classification pipeline that leverages hybrid nod
 
 # Results
 
+## Node2Vec + BioBERT
+
 ```
 LogisticRegression test AUC (scaled, max_iter=1000): 0.9406
 
@@ -54,9 +56,35 @@ AUPR:  0.9569
 F1:    0.8922
 ```
 
+## Node2Vec + BioLinkBERT-Large
+
+```
+LogisticRegression test AUC (scaled, max_iter=1000): 0.9394
+
+=== Best MLP Model (Test Set) ===
+Config: hidden_dim=256, lr=0.0005, epochs=10
+AUC:   0.9695
+AUPR:  0.9564
+F1:    0.8891
+```
+
+## Node2Vec + BioM-BERT-PMC-Large
+
+```
+
+LogisticRegression test AUC (scaled, max_iter=1000): 0.9417
+
+=== Best MLP Model (Test Set) ===
+Config: hidden_dim=256, lr=0.001, epochs=10
+AUC:   0.9751
+AUPR:  0.9656
+F1:    0.9034
+```
+
+
 ---
 
-# Interpretation
+# Interpretation (BioBERT)
 
 - Both classifiers show strong performance. Strong performance using logistic regression alone suggests high quality feature representation using the hybrid embeddings (i.e. even a relatively simple model can make accurate predictions given how well the hybrid embeddings capture information about nodes and relationships).
 
